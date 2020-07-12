@@ -17,7 +17,7 @@ public:
     // Sets default values for this component's properties
     ULeverPullComponent();
 
-    void PerformAction();
+    void ActivateLeverPull();
 
 protected:
     // Called when the game starts
@@ -32,6 +32,12 @@ private:
 
     UPROPERTY()
     UAudioComponent* AudioComponent;
+
+    UPROPERTY(EditAnywhere)
+    AActor* DoorLeftSide;
+
+    UPROPERTY(EditAnywhere)
+    AActor* DoorRightSide;
     
     bool IsPulled{false};
     bool PullRequested{false};

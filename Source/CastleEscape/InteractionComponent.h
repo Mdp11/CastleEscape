@@ -36,9 +36,6 @@ private:
 	UPROPERTY()
 	UInputComponent* InputComponent{nullptr};
 	
-	UPROPERTY(EditAnywhere)
-	ULeverPullComponent* LeverPullComponent{nullptr};
-	
 	void FindInputComponent();
 	void Interact();
 	FHitResult GetFirsDynamictObjectInReach() const;

@@ -49,7 +49,7 @@ void ULeverPullComponent::TickComponent(float DeltaTime, ELevelTick TickType,
     // ...
 }
 
-void ULeverPullComponent::PerformAction()
+void ULeverPullComponent::ActivateLeverPull()
 {
     if (!PullRequested)
     {

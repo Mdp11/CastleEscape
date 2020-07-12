@@ -55,11 +55,7 @@ void UInteractionComponent::Interact()
         UE_LOG(LogTemp, Display, TEXT("Clicked actor %s"), *ActorHit->GetName());
         if (ActorHit->GetName().Equals("SM_Lever_24"))
         {
-            if (!LeverPullComponent)
-            {
-                LeverPullComponent = ActorHit->FindComponentByClass<ULeverPullComponent>();
-            }
-            LeverPullComponent->PerformAction();
+            ActorHit->FindComponentByClass<ULeverPullComponent>()->ActivateLeverPull();
         }
     }
 }
