@@ -3,7 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "LeverPullComponent.h"
 #include "Components/ActorComponent.h"
+#include "Components/InputComponent.h"
+
 #include "InteractionComponent.generated.h"
 
 
@@ -19,10 +22,26 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	FVector GetPlayerReach() const;
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	
+private:
+
+	UPROPERTY(EditAnywhere)
+	float Reach{200.f};
+	
+	UPROPERTY()
+	UInputComponent* InputComponent{nullptr};
+	
+	UPROPERTY(EditAnywhere)
+	ULeverPullComponent* LeverPullComponent{nullptr};
+	
+	void FindInputComponent();
+	void Interact();
+	FHitResult GetFirsDynamictObjectInReach() const;
 
 		
 };

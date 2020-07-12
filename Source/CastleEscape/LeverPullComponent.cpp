@@ -20,7 +20,8 @@ ULeverPullComponent::ULeverPullComponent()
 void ULeverPullComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
+	InitialPitch = CurrentPitch = GetOwner()->GetActorRotation().Pitch;
+	TargetPitch += InitialPitch;
 	// ...
 	
 }
@@ -30,7 +31,28 @@ void ULeverPullComponent::BeginPlay()
 void ULeverPullComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+	if(IsPulled && CurrentPitch != TargetPitch)
+	{
+		PullLever(DeltaTime);
+	}
 	// ...
 }
+
+void ULeverPullComponent::PerformAction()
+{
+	if(!IsPulled)
+	{
+		IsPulled = true;
+	}
+}
+
+void ULeverPullComponent::PullLever(const float DeltaTime)
+{
+	CurrentPitch = FMath::FInterpTo(CurrentPitch, TargetPitch, DeltaTime, 1.5f);
+	FRotator Rotator = GetOwner()->GetActorRotation();
+	Rotator.Pitch = CurrentPitch;
+	GetOwner()->SetActorRotation(Rotator);
+}
+
+
 
