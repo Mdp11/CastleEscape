@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Components/AudioComponent.h"
+
 #include "LeverPullComponent.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -27,7 +29,13 @@ public:
                                FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
+
+    UPROPERTY()
+    UAudioComponent* AudioComponent;
+    
     bool IsPulled{false};
+    bool PullRequested{false};
+    float AudioPlayed{false};
 
     UPROPERTY(EditAnywhere)
     float TargetPitch{65.f};
@@ -36,4 +44,6 @@ private:
     float CurrentPitch{};
 
     void PullLever(float DeltaTime);
+
+    void FindAudioComponent();
 };
