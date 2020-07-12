@@ -2,6 +2,9 @@
 
 #include "LeverPullComponent.h"
 
+
+// #include "LeftDoorOpener.h"
+#include "PrisonDoorOpenerComponent.h"
 #include "GameFramework/Actor.h"
 
 // Sets default values for this component's properties
@@ -32,19 +35,16 @@ void ULeverPullComponent::TickComponent(float DeltaTime, ELevelTick TickType,
     if (PullRequested && !FMath::IsNearlyEqual(CurrentPitch, TargetPitch, 0.1f))
     {
         PullLever(DeltaTime);
-        if (!AudioPlayed)
+        if (AudioComponent && !AudioPlayed)
         {
             AudioComponent->Play();
+            AudioPlayed = true;
         }
-        AudioPlayed = true;
     }
-    else if (FMath::IsNearlyEqual(CurrentPitch, TargetPitch, 0.001f))
+    else if (FMath::IsNearlyEqual(CurrentPitch, TargetPitch, 0.1f))
     {
-        IsPulled = true;
-    }
-    if (IsPulled)
-    {
-        //OpenDoor
+        UE_LOG(LogTemp, Error, TEXT("Opening door..."));
+        OpenDoor();
     }
     // ...
 }
@@ -73,4 +73,10 @@ void ULeverPullComponent::FindAudioComponent()
     {
         UE_LOG(LogTemp, Error, TEXT("Audio component on lever not set!"));
     }
+}
+
+void ULeverPullComponent::OpenDoor() const
+{
+    DoorLeftSide->FindComponentByClass<UPrisonDoorOpenerComponent>()->RequestOpenDoor();
+    DoorRightSide->FindComponentByClass<UPrisonDoorOpenerComponent>()->RequestOpenDoor();
 }

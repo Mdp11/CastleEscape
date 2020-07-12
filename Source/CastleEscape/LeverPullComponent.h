@@ -39,7 +39,6 @@ private:
     UPROPERTY(EditAnywhere)
     AActor* DoorRightSide;
     
-    bool IsPulled{false};
     bool PullRequested{false};
     float AudioPlayed{false};
 
@@ -50,6 +49,6 @@ private:
     float CurrentPitch{};
 
     void PullLever(float DeltaTime);
-
     void FindAudioComponent();
+    void OpenDoor() const;
 };
