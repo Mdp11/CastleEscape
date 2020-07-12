@@ -3,26 +3,25 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "LeverPullComponent.h"
 #include "Components/ActorComponent.h"
-#include "Components/InputComponent.h"
-
-#include "InteractionComponent.generated.h"
+#include "Components/AudioComponent.h"
+#include "PrisonDoorOpenerComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class CASTLEESCAPE_API UInteractionComponent : public UActorComponent
+class CASTLEESCAPE_API UPrisonDoorOpenerComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UInteractionComponent();
+	UPrisonDoorOpenerComponent();
+
+	void RequestOpenDoor();
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-	FVector GetPlayerReach() const;
 
 public:	
 	// Called every frame
@@ -30,15 +29,20 @@ public:
 	
 private:
 
+	bool OpenDoorRequested{false};
+	bool AudioPlayed{false};
+
 	UPROPERTY(EditAnywhere)
-	float Reach{200.f};
-	
+	float TargetYaw{90.f};
+
+	float InitialYaw{};
+	float CurrentYaw{};
+
 	UPROPERTY()
-	UInputComponent* InputComponent{nullptr};
-	
-	void FindInputComponent();
-	void Interact();
-	FHitResult GetFirsDynamictObjectInReach() const;
+    UAudioComponent* AudioComponent;
+
+	void OpenDoor(float DeltaTime);
+	void FindAudioComponent();
 
 		
 };
