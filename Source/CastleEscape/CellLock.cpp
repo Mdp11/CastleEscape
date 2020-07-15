@@ -19,7 +19,7 @@ ACellLock::ACellLock() : AInteractableBase()
         UE_LOG(LogTemp, Warning, TEXT("Closed lock mesh not found."))
     }
     auto OpenMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(
-    TEXT("StaticMesh'/Game/MedievalDungeon/Meshes/Props/SM_Lock_Closed.SM_Lock_Closed'"));
+    TEXT("StaticMesh'/Game/MedievalDungeon/Meshes/Props/SM_Lock_Open.SM_Lock_Open'"));
     if (OpenMesh.Object)
     {
         OpenLockStaticMesh = OpenMesh.Object;
@@ -37,10 +37,12 @@ void ACellLock::Interact()
         if (IsLocked && OpenLockStaticMesh)
         {
             StaticMeshComponent->SetStaticMesh(OpenLockStaticMesh);
+            IsLocked = false;
         }
         else if (!IsLocked && ClosedLockStaticMesh)
         {
             StaticMeshComponent->SetStaticMesh(ClosedLockStaticMesh);
+            IsLocked = true;
         }
     }
 }

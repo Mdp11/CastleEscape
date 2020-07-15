@@ -3,6 +3,7 @@
 #include "InteractionComponent.h"
 #include "GameFramework/Actor.h"
 #include "CollisionQueryParams.h"
+#include "InteractableBase.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
 
@@ -53,10 +54,20 @@ void UInteractionComponent::Interact()
     if (ActorHit)
     {
         UE_LOG(LogTemp, Display, TEXT("Clicked actor %s"), *ActorHit->GetName());
-        if (ActorHit->GetName().Equals("SM_Lever_24"))
+        auto InteractableActor = Cast<AInteractableBase>(ActorHit);
+        if(InteractableActor)
         {
-            ActorHit->FindComponentByClass<ULeverPullComponent>()->ActivateLeverPull();
+            UE_LOG(LogTemp, Warning, TEXT("Cast succeeded"));
+            InteractableActor->Interact();
         }
+        else
+        {
+            UE_LOG(LogTemp, Error, TEXT("Cast failed"));
+        }
+        // if (ActorHit->GetName().Equals("SM_Lever_24"))
+        // {
+        //     ActorHit->FindComponentByClass<ULeverPullComponent>()->ActivateLeverPull();
+        // }
     }
 }
 
