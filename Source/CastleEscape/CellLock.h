@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "CellKey.h"
 #include "CoreMinimal.h"
 #include "InteractableBase.h"
 #include "CellLock.generated.h"
@@ -18,14 +19,17 @@ public:
     ACellLock();
 
     void Interact() override final;
+    bool IsLocked() const;
 
 private:
-
     UPROPERTY(EditAnywhere)
+    ACellKey* CellKey{nullptr};
+
+    UPROPERTY()
     UStaticMesh* ClosedLockStaticMesh{nullptr};
 
-    UPROPERTY(EditAnywhere)
+    UPROPERTY()
     UStaticMesh* OpenLockStaticMesh{nullptr};
 
-    bool IsLocked{true};
+    bool Locked{true};
 };
