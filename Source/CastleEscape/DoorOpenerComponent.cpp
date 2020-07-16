@@ -33,13 +33,16 @@ void UDoorOpenerComponent::TickComponent(float DeltaTime, ELevelTick TickType,
     const float TargetYaw = OpenDoor ? OpenYaw : InitialYaw;
     if (!FMath::IsNearlyEqual(CurrentYaw, TargetYaw, 0.1f))
     {
+        if (AudioComponent && !AudioPlayed)
+        {
+            AudioComponent->Play();
+            AudioPlayed = true;
+        }
         OpenClose(DeltaTime);
     }
-
-    if (AudioComponent && !AudioPlayed)
+    else
     {
-        AudioComponent->Play();
-        AudioPlayed = true;
+        AudioPlayed = false;
     }
 
     // ...
@@ -53,7 +56,7 @@ void UDoorOpenerComponent::RequestOpenClose()
 void UDoorOpenerComponent::OpenClose(const float DeltaTime)
 {
     const float TargetYaw = OpenDoor ? OpenYaw : InitialYaw;
-    CurrentYaw = FMath::FInterpTo(CurrentYaw, TargetYaw, DeltaTime, 0.85f);
+    CurrentYaw = FMath::FInterpTo(CurrentYaw, TargetYaw, DeltaTime, OpeningSpeed);
     FRotator Rotator = GetOwner()->GetActorRotation();
     Rotator.Yaw = CurrentYaw;
     GetOwner()->SetActorRotation(Rotator);

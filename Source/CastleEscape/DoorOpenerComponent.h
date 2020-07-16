@@ -35,6 +35,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float OpenYaw{90.f};
 
+	UPROPERTY(EditAnywhere)
+    float OpeningSpeed{.85f};
+
 	float InitialYaw{};
 	float CurrentYaw{};
 
