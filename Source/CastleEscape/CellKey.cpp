@@ -1,7 +1,8 @@
 // Copyrights Mattia De Prisco 2020
 
-
 #include "CellKey.h"
+
+#include "Utilities.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/Engine.h"
 #include "UObject/ConstructorHelpers.h"
@@ -17,7 +18,7 @@ ACellKey::ACellKey() : AInteractableBase()
     }
     else
     {
-        UE_LOG(LogTemp, Warning, TEXT("Key mesh not found."))
+        UNDEF_PTR("Key mesh");
     }
 }
 
@@ -35,4 +36,3 @@ bool ACellKey::IsPicked() const
 {
     return Picked;
 }
-

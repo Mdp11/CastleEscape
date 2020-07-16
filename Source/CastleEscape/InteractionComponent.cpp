@@ -4,6 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "CollisionQueryParams.h"
 #include "InteractableBase.h"
+#include "Utilities.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
 
@@ -43,7 +44,8 @@ void UInteractionComponent::FindInputComponent()
     }
     else
     {
-        UE_LOG(LogTemp, Error, TEXT("Input component not found."));
+        UNDEF_PTR("InputComponent");
+
     }
 }
 
@@ -53,16 +55,11 @@ void UInteractionComponent::Interact()
     const auto ActorHit = HitResult.GetActor();
     if (ActorHit)
     {
-        UE_LOG(LogTemp, Display, TEXT("Clicked actor %s"), *ActorHit->GetName());
         auto InteractableActor = Cast<AInteractableBase>(ActorHit);
         if(InteractableActor)
         {
-            UE_LOG(LogTemp, Warning, TEXT("Cast succeeded"));
+            UE_LOG(LogTemp, Display, TEXT("Found interactable object"));
             InteractableActor->Interact();
-        }
-        else
-        {
-            UE_LOG(LogTemp, Error, TEXT("Cast failed"));
         }
         // if (ActorHit->GetName().Equals("SM_Lever_24"))
         // {

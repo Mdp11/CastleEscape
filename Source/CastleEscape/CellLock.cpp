@@ -1,6 +1,8 @@
 // Copyrights Mattia De Prisco 2020
 
 #include "CellLock.h"
+
+#include "Utilities.h"
 #include "Components/StaticMeshComponent.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/Engine.h"
@@ -17,7 +19,7 @@ ACellLock::ACellLock() : AInteractableBase()
     }
     else
     {
-        UE_LOG(LogTemp, Warning, TEXT("Closed lock mesh not found."))
+        UNDEF_PTR("Closed lock mesh");
     }
     const auto OpenMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(
         TEXT("StaticMesh'/Game/MedievalDungeon/Meshes/Props/SM_Lock_Open.SM_Lock_Open'"));
@@ -27,15 +29,20 @@ ACellLock::ACellLock() : AInteractableBase()
     }
     else
     {
-        UE_LOG(LogTemp, Warning, TEXT("Open lock mesh not found."))
+        UNDEF_PTR("Open lock mesh");
     }
 }
 
 void ACellLock::Interact()
 {
-    if (!StaticMeshComponent || !CellKey)
+    if (!StaticMeshComponent)
     {
-        UE_LOG(LogTemp, Warning, TEXT("Lock mesh or CellKey pointer are null."))
+        UNDEF_PTR("StaticMeshComponent");
+        return;
+    }
+    if(!CellKey)
+    {
+        UNDEF_PTR("CellKey actor");
         return;
     }
     if (!CellKey->IsPicked())
