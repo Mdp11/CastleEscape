@@ -7,45 +7,43 @@
 #include "Components/AudioComponent.h"
 #include "DoorOpenerComponent.generated.h"
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class CASTLEESCAPE_API UDoorOpenerComponent : public UActorComponent
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
-	UDoorOpenerComponent();
+public:
+    // Sets default values for this component's properties
+    UDoorOpenerComponent();
 
-	void RequestOpenClose();
+    void RequestOpenClose();
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+    // Called when the game starts
+    virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	
+public:
+    // Called every frame
+    virtual void TickComponent(float DeltaTime, ELevelTick TickType,
+                               FActorComponentTickFunction* ThisTickFunction) override;
+
 private:
 
-	bool OpenDoor{false};
-	bool AudioPlayed{false};
+    bool OpenDoor{false};
+    bool AudioPlayed{false};
 
-	UPROPERTY(EditAnywhere)
-	float OpenYaw{90.f};
+    UPROPERTY(EditAnywhere)
+    float OpenYaw{90.f};
 
-	UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere)
     float OpeningSpeed{.85f};
 
-	float InitialYaw{};
-	float CurrentYaw{};
+    float InitialYaw{};
+    float CurrentYaw{};
 
-	UPROPERTY()
+    UPROPERTY()
     UAudioComponent* AudioComponent;
 
-	void OpenClose(float DeltaTime);
-	void FindAudioComponent();
-
-		
+    void OpenClose(float DeltaTime);
+    void FindAudioComponent();
 };

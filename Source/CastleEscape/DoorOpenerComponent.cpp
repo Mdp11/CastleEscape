@@ -57,9 +57,10 @@ void UDoorOpenerComponent::OpenClose(const float DeltaTime)
 {
     const float TargetYaw = OpenDoor ? OpenYaw : InitialYaw;
     CurrentYaw = FMath::FInterpTo(CurrentYaw, TargetYaw, DeltaTime, OpeningSpeed);
-    FRotator Rotator = GetOwner()->GetActorRotation();
+    auto Owner = GetOwner();
+    FRotator Rotator = GetOwner()->FindComponentByClass<UStaticMeshComponent>()->GetComponentRotation();
     Rotator.Yaw = CurrentYaw;
-    GetOwner()->SetActorRotation(Rotator);
+    GetOwner()->FindComponentByClass<UStaticMeshComponent>()->SetWorldRotation(Rotator);
 }
 
 void UDoorOpenerComponent::FindAudioComponent()
