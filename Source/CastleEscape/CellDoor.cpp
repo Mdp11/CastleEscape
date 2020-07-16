@@ -19,7 +19,7 @@ ACellDoor::ACellDoor()
     }
     else
     {
-        UNDEF_PTR("CellDoor mesh", GetName());
+        UNDEF_PTR("CellDoor mesh", *GetName());
     }
 
     DoorOpenerComponent = CreateDefaultSubobject<UDoorOpenerComponent>("RootComponent");
@@ -30,7 +30,7 @@ void ACellDoor::Interact()
 {
     if (!CellLock)
     {
-        UNDEF_PTR("CellLock", GetName());
+        UNDEF_PTR("CellLock", *GetName());
         return;
     }
 

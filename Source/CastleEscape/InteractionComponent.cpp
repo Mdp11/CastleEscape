@@ -44,7 +44,7 @@ void UInteractionComponent::FindInputComponent()
     }
     else
     {
-        UNDEF_PTR("InputComponent", GetOwner()->GetName());
+        UNDEF_PTR("InputComponent", *GetOwner()->GetName());
 
     }
 }

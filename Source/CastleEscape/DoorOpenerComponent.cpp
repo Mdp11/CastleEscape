@@ -65,6 +65,6 @@ void UDoorOpenerComponent::FindAudioComponent()
 
     if (!AudioComponent)
     {
-        UNDEF_PTR("AudioComponent", GetOwner()->GetName())
+        UNDEF_PTR("AudioComponent", *GetOwner()->GetName())
     }
 }
