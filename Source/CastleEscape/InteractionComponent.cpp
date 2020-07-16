@@ -49,7 +49,7 @@ void UInteractionComponent::FindInputComponent()
     }
 }
 
-void UInteractionComponent::Interact() const
+void UInteractionComponent::Interact()
 {
     const auto HitResult = GetFirsDynamictObjectInReach();
     const auto ActorHit = HitResult.GetActor();

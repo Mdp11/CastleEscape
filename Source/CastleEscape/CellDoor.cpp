@@ -6,6 +6,7 @@
 #include "Utilities.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Components/StaticMeshComponent.h"
+#include "Engine/Engine.h"
 
 ACellDoor::ACellDoor()
 {
@@ -27,5 +28,27 @@ ACellDoor::ACellDoor()
 
 void ACellDoor::Interact()
 {
-    DoorOpenerComponent->RequestOpenClose();
+    if (!CellLock)
+    {
+        UNDEF_PTR("CellLock", GetName());
+        return;
+    }
+
+    if (Open)
+    {
+        return;
+    }
+
+    if (CellLock->IsLocked())
+    {
+        if (GEngine)
+        {
+            GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("It's locked."));
+        }
+    }
+    else
+    {
+        DoorOpenerComponent->RequestOpenClose();
+        Open = true;
+    }
 }

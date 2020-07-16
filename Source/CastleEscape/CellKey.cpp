@@ -24,12 +24,16 @@ ACellKey::ACellKey() : AInteractableBase()
 
 void ACellKey::Interact()
 {
+    if(IsPicked())
+    {
+        return;
+    }
     if (GEngine)
     {
         GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("You obtained a key."));
     }
     Picked = true;
-    Destroy();
+    StaticMeshComponent->SetVisibility(false);
 }
 
 bool ACellKey::IsPicked() const

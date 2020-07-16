@@ -49,7 +49,7 @@ void ACellLock::Interact()
     {
         if (GEngine)
         {
-            GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("You need a key to open it."));
+            GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("You need a key to unlock it."));
         }
         return;
     }

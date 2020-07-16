@@ -37,7 +37,7 @@ private:
 	UInputComponent* InputComponent{nullptr};
 	
 	void FindInputComponent();
-	void Interact() const;
+	void Interact();
 	FHitResult GetFirsDynamictObjectInReach() const;
 
 		
