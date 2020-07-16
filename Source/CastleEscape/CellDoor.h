@@ -4,6 +4,7 @@
 
 #include "CellLock.h"
 #include "CoreMinimal.h"
+#include "DoorOpenerComponent.h"
 #include "InteractableBase.h"
 #include "CellDoor.generated.h"
 
@@ -22,6 +23,10 @@ public:
 
 private:
     UPROPERTY(EditAnywhere)
+    UDoorOpenerComponent* DoorOpenerComponent;
+    
+    UPROPERTY(EditAnywhere)
     ACellLock* CellLock{nullptr};
+
     bool Open{false};
 };

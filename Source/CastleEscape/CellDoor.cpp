@@ -1,9 +1,8 @@
 // Copyrights Mattia De Prisco 2020
 
-
 #include "CellDoor.h"
 
-
+#include "DoorOpenerComponent.h"
 #include "Utilities.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Components/StaticMeshComponent.h"
@@ -21,12 +20,12 @@ ACellDoor::ACellDoor()
     {
         UNDEF_PTR("CellDoor mesh");
     }
+
+    DoorOpenerComponent = CreateDefaultSubobject<UDoorOpenerComponent>("RootComponent");
+    AddOwnedComponent(DoorOpenerComponent);
 }
 
 void ACellDoor::Interact()
 {
-    
+    DoorOpenerComponent->RequestOpenDoor();
 }
-
-
-
