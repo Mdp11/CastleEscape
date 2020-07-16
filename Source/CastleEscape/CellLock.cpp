@@ -3,7 +3,7 @@
 #include "CellLock.h"
 #include "Components/StaticMeshComponent.h"
 #include "UObject/ConstructorHelpers.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 ACellLock::ACellLock() : AInteractableBase()
 {

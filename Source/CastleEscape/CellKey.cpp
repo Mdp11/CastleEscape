@@ -3,6 +3,7 @@
 
 #include "CellKey.h"
 #include "Components/StaticMeshComponent.h"
+#include "Engine/Engine.h"
 #include "UObject/ConstructorHelpers.h"
 
 ACellKey::ACellKey() : AInteractableBase()
@@ -22,8 +23,12 @@ ACellKey::ACellKey() : AInteractableBase()
 
 void ACellKey::Interact()
 {
+    if (GEngine)
+    {
+        GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("You obtained a key."));
+    }
     Picked = true;
-    this->Destroy();
+    Destroy();
 }
 
 bool ACellKey::IsPicked() const
