@@ -53,6 +53,10 @@ void ACellLock::Interact()
         }
         return;
     }
+    if(AudioComponent)
+    {
+        AudioComponent->Play();
+    }
     if (Locked && OpenLockStaticMesh)
     {
         StaticMeshComponent->SetStaticMesh(OpenLockStaticMesh);

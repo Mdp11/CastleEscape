@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "UnrealAudioSoundFile.h"
+#include "Components/AudioComponent.h"
 #include "GameFramework/Actor.h"
 #include "InteractableBase.generated.h"
 
@@ -21,9 +23,15 @@ protected:
 
     UStaticMeshComponent* StaticMeshComponent{nullptr};
 
+    UAudioComponent* AudioComponent{nullptr};
+
 public:
     // Called every frame
     virtual void Tick(float DeltaTime) override;
 
     virtual void Interact();
+
+private:
+    void FindAudioComponent();
+    
 };

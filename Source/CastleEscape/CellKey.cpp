@@ -32,6 +32,7 @@ void ACellKey::Interact()
     {
         GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("You obtained a key."));
     }
+    AudioComponent->Play();
     Picked = true;
     StaticMeshComponent->SetVisibility(false);
 }

@@ -26,11 +26,11 @@ APrisonLever::APrisonLever() : AInteractableBase()
 
 void APrisonLever::Tick(float DeltaTime)
 {
-    if (Pulled && !FMath::IsNearlyEqual(CurrentPitch, TargetPitch, 0.1f))
+    if (Pulled && !FMath::IsNearlyEqual(CurrentPitch, TargetPitch, 1.f))
     {
         Pull(DeltaTime);
     }
-    else if (!DoorOpened && FMath::IsNearlyEqual(CurrentPitch, TargetPitch, 0.1f))
+    else if (!DoorOpened && FMath::IsNearlyEqual(CurrentPitch, TargetPitch, 1.f))
     {
         OpenDoor();
         DoorOpened = true;
@@ -41,6 +41,7 @@ void APrisonLever::Interact()
 {
     if(!Pulled)
     {
+        AudioComponent->Play();
         Pulled = true;
     }
 }
