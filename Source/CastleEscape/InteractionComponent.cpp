@@ -44,12 +44,12 @@ void UInteractionComponent::FindInputComponent()
     }
     else
     {
-        UNDEF_PTR("InputComponent");
+        UNDEF_PTR("InputComponent", GetOwner()->GetName());
 
     }
 }
 
-void UInteractionComponent::Interact()
+void UInteractionComponent::Interact() const
 {
     const auto HitResult = GetFirsDynamictObjectInReach();
     const auto ActorHit = HitResult.GetActor();

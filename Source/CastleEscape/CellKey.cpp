@@ -18,7 +18,7 @@ ACellKey::ACellKey() : AInteractableBase()
     }
     else
     {
-        UNDEF_PTR("Key mesh");
+        UNDEF_PTR("Key mesh", GetName());
     }
 }
 

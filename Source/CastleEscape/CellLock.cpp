@@ -19,7 +19,7 @@ ACellLock::ACellLock() : AInteractableBase()
     }
     else
     {
-        UNDEF_PTR("Closed lock mesh");
+        UNDEF_PTR("Closed lock mesh", GetName());
     }
     const auto OpenMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(
         TEXT("StaticMesh'/Game/MedievalDungeon/Meshes/Props/SM_Lock_Open.SM_Lock_Open'"));
@@ -29,7 +29,7 @@ ACellLock::ACellLock() : AInteractableBase()
     }
     else
     {
-        UNDEF_PTR("Open lock mesh");
+        UNDEF_PTR("Open lock mesh", GetName());
     }
 }
 
@@ -37,12 +37,12 @@ void ACellLock::Interact()
 {
     if (!StaticMeshComponent)
     {
-        UNDEF_PTR("StaticMeshComponent");
+        UNDEF_PTR("StaticMeshComponent", GetName());
         return;
     }
     if(!CellKey)
     {
-        UNDEF_PTR("CellKey actor");
+        UNDEF_PTR("CellKey actor", GetName());
         return;
     }
     if (!CellKey->IsPicked())

@@ -17,7 +17,7 @@ public:
 	// Sets default values for this component's properties
 	UDoorOpenerComponent();
 
-	void RequestOpenDoor();
+	void RequestOpenClose();
 
 protected:
 	// Called when the game starts
@@ -29,11 +29,11 @@ public:
 	
 private:
 
-	bool OpenDoorRequested{false};
+	bool OpenDoor{false};
 	bool AudioPlayed{false};
 
 	UPROPERTY(EditAnywhere)
-	float TargetYaw{90.f};
+	float OpenYaw{90.f};
 
 	float InitialYaw{};
 	float CurrentYaw{};
@@ -41,7 +41,7 @@ private:
 	UPROPERTY()
     UAudioComponent* AudioComponent;
 
-	void OpenDoor(float DeltaTime);
+	void OpenClose(float DeltaTime);
 	void FindAudioComponent();
 
 		

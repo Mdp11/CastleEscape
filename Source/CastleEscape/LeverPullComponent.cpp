@@ -77,6 +77,6 @@ void ULeverPullComponent::FindAudioComponent()
 
 void ULeverPullComponent::OpenDoor() const
 {
-    DoorLeftSide->FindComponentByClass<UDoorOpenerComponent>()->RequestOpenDoor();
-    DoorRightSide->FindComponentByClass<UDoorOpenerComponent>()->RequestOpenDoor();
+    DoorLeftSide->FindComponentByClass<UDoorOpenerComponent>()->RequestOpenClose();
+    DoorRightSide->FindComponentByClass<UDoorOpenerComponent>()->RequestOpenClose();
 }
