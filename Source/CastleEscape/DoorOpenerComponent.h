@@ -5,17 +5,17 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Components/AudioComponent.h"
-#include "PrisonDoorOpenerComponent.generated.h"
+#include "DoorOpenerComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class CASTLEESCAPE_API UPrisonDoorOpenerComponent : public UActorComponent
+class CASTLEESCAPE_API UDoorOpenerComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UPrisonDoorOpenerComponent();
+	UDoorOpenerComponent();
 
 	void RequestOpenDoor();
 

@@ -1,10 +1,10 @@
 // Copyrights Mattia De Prisco 2020
 
 
-#include "PrisonDoorOpenerComponent.h"
+#include "DoorOpenerComponent.h"
 
 // Sets default values for this component's properties
-UPrisonDoorOpenerComponent::UPrisonDoorOpenerComponent()
+UDoorOpenerComponent::UDoorOpenerComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -15,7 +15,7 @@ UPrisonDoorOpenerComponent::UPrisonDoorOpenerComponent()
 
 
 // Called when the game starts
-void UPrisonDoorOpenerComponent::BeginPlay()
+void UDoorOpenerComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	FindAudioComponent();
@@ -29,7 +29,7 @@ void UPrisonDoorOpenerComponent::BeginPlay()
 
 
 // Called every frame
-void UPrisonDoorOpenerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UDoorOpenerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	if (OpenDoorRequested && !FMath::IsNearlyEqual(CurrentYaw, TargetYaw, 0.1f))
@@ -45,7 +45,7 @@ void UPrisonDoorOpenerComponent::TickComponent(float DeltaTime, ELevelTick TickT
 	// ...
 }
 
-void UPrisonDoorOpenerComponent::RequestOpenDoor()
+void UDoorOpenerComponent::RequestOpenDoor()
 {
 	if (!OpenDoorRequested)
 	{
@@ -53,7 +53,7 @@ void UPrisonDoorOpenerComponent::RequestOpenDoor()
 	}
 }
 
-void UPrisonDoorOpenerComponent::OpenDoor(const float DeltaTime)
+void UDoorOpenerComponent::OpenDoor(const float DeltaTime)
 {
 	CurrentYaw = FMath::FInterpTo(CurrentYaw, TargetYaw, DeltaTime, 0.85f);
 	FRotator Rotator = GetOwner()->GetActorRotation();
@@ -61,7 +61,7 @@ void UPrisonDoorOpenerComponent::OpenDoor(const float DeltaTime)
 	GetOwner()->SetActorRotation(Rotator);
 }
 
-void UPrisonDoorOpenerComponent::FindAudioComponent()
+void UDoorOpenerComponent::FindAudioComponent()
 {
 	AudioComponent = GetOwner()->FindComponentByClass<UAudioComponent>();
 

@@ -4,7 +4,7 @@
 
 
 // #include "LeftDoorOpener.h"
-#include "PrisonDoorOpenerComponent.h"
+#include "DoorOpenerComponent.h"
 #include "GameFramework/Actor.h"
 
 // Sets default values for this component's properties
@@ -77,6 +77,6 @@ void ULeverPullComponent::FindAudioComponent()
 
 void ULeverPullComponent::OpenDoor() const
 {
-    DoorLeftSide->FindComponentByClass<UPrisonDoorOpenerComponent>()->RequestOpenDoor();
-    DoorRightSide->FindComponentByClass<UPrisonDoorOpenerComponent>()->RequestOpenDoor();
+    DoorLeftSide->FindComponentByClass<UDoorOpenerComponent>()->RequestOpenDoor();
+    DoorRightSide->FindComponentByClass<UDoorOpenerComponent>()->RequestOpenDoor();
 }
