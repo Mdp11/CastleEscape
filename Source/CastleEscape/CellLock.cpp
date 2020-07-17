@@ -21,6 +21,7 @@ ACellLock::ACellLock() : AInteractableBase()
     {
         UNDEF_PTR("Closed lock mesh", *GetName());
     }
+    
     const auto OpenMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(
         TEXT("StaticMesh'/Game/MedievalDungeon/Meshes/Props/SM_Lock_Open.SM_Lock_Open'"));
     if (OpenMesh.Object)
@@ -30,6 +31,17 @@ ACellLock::ACellLock() : AInteractableBase()
     else
     {
         UNDEF_PTR("Open lock mesh", *GetName());
+    }
+
+    const auto OpenLockSound = ConstructorHelpers::FObjectFinder<USoundWave>(
+    TEXT("SoundWave'/Game/SoundEffects/lock_opening.lock_opening'"));
+    if (OpenLockSound.Object)
+    {
+        OpenSound = OpenLockSound.Object;
+    }
+    else
+    {
+        UNDEF_PTR("Open door sound", *GetName());
     }
 }
 
@@ -47,6 +59,10 @@ void ACellLock::Interact()
     }
     if (!CellKey->IsPicked())
     {
+        if(AudioComponent)
+        {
+            AudioComponent->Play();
+        }
         if (GEngine)
         {
             GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("You need a key to unlock it."));
@@ -55,6 +71,7 @@ void ACellLock::Interact()
     }
     if(AudioComponent)
     {
+        AudioComponent->SetSound(OpenSound);
         AudioComponent->Play();
     }
     if (Locked && OpenLockStaticMesh)

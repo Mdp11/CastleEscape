@@ -31,5 +31,8 @@ private:
     UPROPERTY()
     UStaticMesh* OpenLockStaticMesh{nullptr};
 
+    UPROPERTY()
+    USoundWave* OpenSound{nullptr};
+
     bool Locked{true};
 };

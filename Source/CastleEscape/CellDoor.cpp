@@ -24,6 +24,17 @@ ACellDoor::ACellDoor()
 
     DoorOpenerComponent = CreateDefaultSubobject<UDoorOpenerComponent>("RootComponent");
     AddOwnedComponent(DoorOpenerComponent);
+
+    const auto OpenDoorSound = ConstructorHelpers::FObjectFinder<USoundWave>(
+    TEXT("SoundWave'/Game/SoundEffects/cell_door_opening.cell_door_opening'"));
+    if (OpenDoorSound.Object)
+    {
+        OpenSound = OpenDoorSound.Object;
+    }
+    else
+    {
+        UNDEF_PTR("Open lock sound", *GetName());
+    }
 }
 
 void ACellDoor::Interact()
@@ -41,6 +52,10 @@ void ACellDoor::Interact()
 
     if (CellLock->IsLocked())
     {
+        if(AudioComponent)
+        {
+            AudioComponent->Play();
+        }
         if (GEngine)
         {
             GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Yellow, TEXT("It's locked."));
@@ -48,6 +63,11 @@ void ACellDoor::Interact()
     }
     else
     {
+        if(AudioComponent)
+        {
+            AudioComponent->SetSound(OpenSound);
+            AudioComponent->Play();
+        }
         DoorOpenerComponent->RequestOpenClose();
         Open = true;
     }

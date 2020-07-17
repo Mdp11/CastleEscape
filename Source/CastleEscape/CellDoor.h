@@ -28,5 +28,8 @@ private:
     UPROPERTY(EditAnywhere)
     ACellLock* CellLock{nullptr};
 
+    UPROPERTY()
+    USoundWave* OpenSound{nullptr};
+
     bool Open{false};
 };

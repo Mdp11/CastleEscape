@@ -26,11 +26,12 @@ APrisonLever::APrisonLever() : AInteractableBase()
 
 void APrisonLever::Tick(float DeltaTime)
 {
-    if (Pulled && !FMath::IsNearlyEqual(CurrentPitch, TargetPitch, 1.f))
+    const bool TargetReached = FMath::IsNearlyEqual(CurrentPitch, TargetPitch, 1.f);
+    if (Pulled && !TargetReached)
     {
         Pull(DeltaTime);
     }
-    else if (!DoorOpened && FMath::IsNearlyEqual(CurrentPitch, TargetPitch, 1.f))
+    else if (!DoorOpened && TargetReached)
     {
         OpenDoor();
         DoorOpened = true;
