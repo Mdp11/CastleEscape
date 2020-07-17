@@ -72,3 +72,8 @@ void UDoorOpenerComponent::FindAudioComponent()
         UNDEF_PTR("AudioComponent", *GetOwner()->GetName())
     }
 }
+
+void UDoorOpenerComponent::ModifyInitialYaw(float Amount)
+{
+    InitialYaw += Amount;
+}

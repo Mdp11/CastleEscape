@@ -31,5 +31,9 @@ private:
     UPROPERTY()
     USoundWave* OpenSound{nullptr};
 
+    UPROPERTY()
+    USoundWave* LockedSound{nullptr};
+
     bool Open{false};
+    bool AlmostClosed{false};
 };
