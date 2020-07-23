@@ -1,23 +1,22 @@
-// Mattia De Prisco
+// Copyrights Mattia De Prisco 2020
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Components/AudioComponent.h"
-
-#include "LeverPullComponent.generated.h"
+#include "DoorOpenerComponent.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class CASTLEESCAPE_API ULeverPullComponent : public UActorComponent
+class CASTLEESCAPE_API UDoorOpenerComponent : public UActorComponent
 {
     GENERATED_BODY()
 
 public:
     // Sets default values for this component's properties
-    ULeverPullComponent();
+    UDoorOpenerComponent();
 
-    void ActivateLeverPull();
+    void RequestOpenClose();
 
 protected:
     // Called when the game starts
@@ -28,27 +27,28 @@ public:
     virtual void TickComponent(float DeltaTime, ELevelTick TickType,
                                FActorComponentTickFunction* ThisTickFunction) override;
 
+    void ModifyInitialYaw(float Amount);
+
 private:
+
+    bool OpenDoor{false};
+    bool AudioPlayed{false};
+
+    UPROPERTY(EditAnywhere)
+    float OpenYaw{90.f};
+
+    UPROPERTY(EditAnywhere)
+    float OpeningSpeed{.85f};
+
+    UPROPERTY(EditAnywhere)
+    float ClosingErrorTolerance{0.1f};
+
+    float InitialYaw{};
+    float CurrentYaw{};
 
     UPROPERTY()
     UAudioComponent* AudioComponent;
 
-    UPROPERTY(EditAnywhere)
-    AActor* DoorLeftSide;
-
-    UPROPERTY(EditAnywhere)
-    AActor* DoorRightSide;
-
-    bool PullRequested{false};
-    float AudioPlayed{false};
-
-    UPROPERTY(EditAnywhere)
-    float TargetPitch{65.f};
-
-    float InitialPitch{};
-    float CurrentPitch{};
-
-    void PullLever(float DeltaTime);
+    void OpenClose(float DeltaTime);
     void FindAudioComponent();
-    void OpenDoor() const;
 };
