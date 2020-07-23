@@ -9,36 +9,34 @@
 
 #include "InteractionComponent.generated.h"
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class CASTLEESCAPE_API UInteractionComponent : public UActorComponent
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
-	UInteractionComponent();
+public:
+    // Sets default values for this component's properties
+    UInteractionComponent();
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-	FVector GetPlayerReach() const;
+    // Called when the game starts
+    virtual void BeginPlay() override;
+    FVector GetPlayerReach() const;
 
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	
+public:
+    // Called every frame
+    virtual void TickComponent(float DeltaTime, ELevelTick TickType,
+                               FActorComponentTickFunction* ThisTickFunction) override;
+
 private:
 
-	UPROPERTY(EditAnywhere)
-	float Reach{200.f};
-	
-	UPROPERTY()
-	UInputComponent* InputComponent{nullptr};
-	
-	void FindInputComponent();
-	void Interact();
-	FHitResult GetFirsDynamictObjectInReach() const;
+    UPROPERTY(EditAnywhere)
+    float Reach{200.f};
 
-		
+    UPROPERTY()
+    UInputComponent* InputComponent{nullptr};
+
+    void FindInputComponent();
+    void Interact();
+    FHitResult GetFirsDynamictObjectInReach() const;
 };

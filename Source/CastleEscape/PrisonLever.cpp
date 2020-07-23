@@ -1,8 +1,6 @@
 // Copyrights Mattia De Prisco 2020
 
-
 #include "PrisonLever.h"
-
 
 #include "DoorOpenerComponent.h"
 #include "Utilities.h"
@@ -40,7 +38,7 @@ void APrisonLever::Tick(float DeltaTime)
 
 void APrisonLever::Interact()
 {
-    if(!Pulled)
+    if (!Pulled)
     {
         AudioComponent->Play();
         Pulled = true;
@@ -57,11 +55,11 @@ void APrisonLever::Pull(const float DeltaTime)
 
 void APrisonLever::OpenDoor() const
 {
-    if(DoorLeftSide && DoorRightSide)
+    if (DoorLeftSide && DoorRightSide)
     {
         auto DoorOpenerComponentLeft = DoorLeftSide->FindComponentByClass<UDoorOpenerComponent>();
         auto DoorOpenerComponentRight = DoorRightSide->FindComponentByClass<UDoorOpenerComponent>();
-        if(!DoorOpenerComponentLeft || !DoorOpenerComponentRight)
+        if (!DoorOpenerComponentLeft || !DoorOpenerComponentRight)
         {
             const FString DoorNames = DoorLeftSide->GetName() + " or " + DoorRightSide->GetName();
             UNDEF_PTR("Door opener component", *DoorNames)
@@ -69,12 +67,9 @@ void APrisonLever::OpenDoor() const
         }
         DoorOpenerComponentLeft->RequestOpenClose();
         DoorOpenerComponentRight->RequestOpenClose();
-        
     }
     else
     {
         UNDEF_PTR("DoorActor", *GetName());
     }
 }
-
-

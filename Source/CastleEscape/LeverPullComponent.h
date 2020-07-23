@@ -39,7 +39,6 @@ private:
     UPROPERTY(EditAnywhere)
     AActor* DoorRightSide;
 
-    
     bool PullRequested{false};
     float AudioPlayed{false};
 

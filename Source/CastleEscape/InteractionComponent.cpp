@@ -45,7 +45,6 @@ void UInteractionComponent::FindInputComponent()
     else
     {
         UNDEF_PTR("InputComponent", *GetOwner()->GetName());
-
     }
 }
 
@@ -56,15 +55,11 @@ void UInteractionComponent::Interact()
     if (ActorHit)
     {
         auto InteractableActor = Cast<AInteractableBase>(ActorHit);
-        if(InteractableActor)
+        if (InteractableActor)
         {
             UE_LOG(LogTemp, Display, TEXT("Found interactable object"));
             InteractableActor->Interact();
         }
-        // if (ActorHit->GetName().Equals("SM_Lever_24"))
-        // {
-        //     ActorHit->FindComponentByClass<ULeverPullComponent>()->ActivateLeverPull();
-        // }
     }
 }
 
