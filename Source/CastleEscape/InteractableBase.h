@@ -17,12 +17,16 @@ public:
     // Sets default values for this actor's properties
     AInteractableBase();
 
+    virtual bool IsGrabbable() const { return Grabbable; }
+
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
 
+    UPROPERTY()
     UStaticMeshComponent* StaticMeshComponent{nullptr};
 
+    UPROPERTY()
     UAudioComponent* AudioComponent{nullptr};
 
 public:
@@ -33,4 +37,6 @@ public:
 
 private:
     void FindAudioComponent();
+
+    bool Grabbable{false};
 };
