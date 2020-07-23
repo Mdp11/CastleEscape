@@ -23,6 +23,7 @@ void UInteractionComponent::BeginPlay()
 {
     Super::BeginPlay();
     FindInputComponent();
+    FindPhysicsHandleComponent();
     // ...
 }
 
@@ -31,7 +32,10 @@ void UInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
                                           FActorComponentTickFunction* ThisTickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+    if (PhysicsHandleComponent->GrabbedComponent)
+    {
+        PhysicsHandleComponent->SetTargetLocation(GetPlayerReach());
+    }
     // ...
 }
 
@@ -41,10 +45,20 @@ void UInteractionComponent::FindInputComponent()
     if (InputComponent)
     {
         InputComponent->BindAction("CLICK", IE_Pressed, this, &UInteractionComponent::Interact);
+        InputComponent->BindAction("CLICK", IE_Released, this, &UInteractionComponent::Release);
     }
     else
     {
         UNDEF_PTR("InputComponent", *GetOwner()->GetName());
+    }
+}
+
+void UInteractionComponent::FindPhysicsHandleComponent()
+{
+    PhysicsHandleComponent = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
+    if (!PhysicsHandleComponent)
+    {
+        UE_LOG(LogTemp, Error, TEXT("Physics handle NOT found!"));
     }
 }
 
@@ -58,8 +72,27 @@ void UInteractionComponent::Interact()
         if (InteractableActor)
         {
             UE_LOG(LogTemp, Display, TEXT("Found interactable object"));
-            InteractableActor->Interact();
+            InteractableActor->IsGrabbable() ? Grab(HitResult) : InteractableActor->Interact();
         }
+    }
+}
+
+void UInteractionComponent::Grab(const FHitResult& HitResult)
+{
+    UE_LOG(LogTemp, Display, TEXT("Trying to grab"));
+    PhysicsHandleComponent->GrabComponentAtLocation
+    (
+        HitResult.GetComponent(),
+        NAME_None,
+        GetPlayerReach()
+    );
+}
+
+void UInteractionComponent::Release()
+{
+    if (PhysicsHandleComponent->GetGrabbedComponent())
+    {
+        PhysicsHandleComponent->ReleaseComponent();
     }
 }
 

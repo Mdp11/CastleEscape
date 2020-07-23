@@ -23,11 +23,13 @@ protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
 
-    UPROPERTY()
+    UPROPERTY(EditAnywhere)
     UStaticMeshComponent* StaticMeshComponent{nullptr};
 
     UPROPERTY()
     UAudioComponent* AudioComponent{nullptr};
+
+    bool Grabbable{false};
 
 public:
     // Called every frame
@@ -37,6 +39,4 @@ public:
 
 private:
     void FindAudioComponent();
-
-    bool Grabbable{false};
 };

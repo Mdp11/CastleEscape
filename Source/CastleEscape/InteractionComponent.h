@@ -6,6 +6,8 @@
 #include "LeverPullComponent.h"
 #include "Components/ActorComponent.h"
 #include "Components/InputComponent.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
+
 
 #include "InteractionComponent.generated.h"
 
@@ -36,7 +38,13 @@ private:
     UPROPERTY()
     UInputComponent* InputComponent{nullptr};
 
+    UPROPERTY()
+    UPhysicsHandleComponent* PhysicsHandleComponent{nullptr};
+
     void FindInputComponent();
+    void FindPhysicsHandleComponent();
     void Interact();
+    void Grab(const FHitResult& HitResult);
+    void Release();
     FHitResult GetFirsDynamictObjectInReach() const;
 };
