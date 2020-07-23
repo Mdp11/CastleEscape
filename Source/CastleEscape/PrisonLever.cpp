@@ -9,6 +9,7 @@
 
 APrisonLever::APrisonLever() : AInteractableBase()
 {
+    PrimaryActorTick.bCanEverTick = true;
     StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
     const auto LeverMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(
         TEXT("StaticMesh'/Game/SM_Lever.SM_Lever'"));

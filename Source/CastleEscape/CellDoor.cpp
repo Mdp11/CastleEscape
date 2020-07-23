@@ -8,8 +8,9 @@
 #include "Components/StaticMeshComponent.h"
 #include "Engine/Engine.h"
 
-ACellDoor::ACellDoor()
+ACellDoor::ACellDoor() : AInteractableBase()
 {
+    PrimaryActorTick.bCanEverTick = true;
     StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
     const auto CellDoorMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(
         TEXT("StaticMesh'/Game/MedievalDungeon/Meshes/Architecture/Dungeon/SM_Cell_Door.SM_Cell_Door'"));
