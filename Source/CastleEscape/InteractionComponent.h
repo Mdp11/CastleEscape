@@ -33,7 +33,7 @@ public:
 private:
 
     UPROPERTY(EditAnywhere)
-    float Reach{200.f};
+    float Reach{100.f};
 
     UPROPERTY()
     UInputComponent* InputComponent{nullptr};

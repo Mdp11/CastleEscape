@@ -80,11 +80,13 @@ void UInteractionComponent::Interact()
 void UInteractionComponent::Grab(const FHitResult& HitResult)
 {
     UE_LOG(LogTemp, Display, TEXT("Trying to grab"));
-    PhysicsHandleComponent->GrabComponentAtLocation
+    FRotator Rotator{90.f, 0.f, 0.f};
+    PhysicsHandleComponent->GrabComponentAtLocationWithRotation
     (
         HitResult.GetComponent(),
         NAME_None,
-        GetPlayerReach()
+        GetPlayerReach(),
+        Rotator
     );
 }
 
