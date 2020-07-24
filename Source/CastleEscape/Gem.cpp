@@ -10,8 +10,7 @@ AGem::AGem() : AInteractableBase()
     Grabbable = true;
     PrimaryActorTick.bCanEverTick = true;
     StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
-    StaticMeshComponent->SetSimulatePhysics(true);
-    StaticMeshComponent->SetEnableGravity(true);
+    StaticMeshComponent->SetEnableGravity(false);
     const auto GemMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(
         TEXT("StaticMesh'/Game/AncientTreasures/Meshes/SM_Gems_01c.SM_Gems_01c'"));
     if (GemMesh.Object)

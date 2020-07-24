@@ -72,7 +72,8 @@ void UInteractionComponent::Interact()
         if (InteractableActor)
         {
             UE_LOG(LogTemp, Display, TEXT("Found interactable object"));
-            InteractableActor->IsGrabbable() ? Grab(HitResult) : InteractableActor->Interact();
+            GrabbedObject = InteractableActor;
+            GrabbedObject->IsGrabbable() ? Grab(HitResult) : InteractableActor->Interact();
         }
     }
 }
@@ -81,6 +82,7 @@ void UInteractionComponent::Grab(const FHitResult& HitResult)
 {
     UE_LOG(LogTemp, Display, TEXT("Trying to grab"));
     FRotator Rotator{90.f, 0.f, 0.f};
+    GrabbedObject->SetEnableGravity(false);
     PhysicsHandleComponent->GrabComponentAtLocationWithRotation
     (
         HitResult.GetComponent(),
@@ -94,8 +96,11 @@ void UInteractionComponent::Release()
 {
     if (PhysicsHandleComponent->GetGrabbedComponent())
     {
+        GrabbedObject->SetEnableGravity(true);
+        GrabbedObject = nullptr;
         PhysicsHandleComponent->ReleaseComponent();
     }
+    
 }
 
 FHitResult UInteractionComponent::GetFirsDynamictObjectInReach() const

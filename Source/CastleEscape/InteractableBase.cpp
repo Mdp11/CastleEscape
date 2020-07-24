@@ -29,6 +29,22 @@ void AInteractableBase::Interact()
     UE_LOG(LogTemp, Warning, TEXT("Do not use this class directly, inherit from it instead."))
 }
 
+void AInteractableBase::SetSimulatePhysics(bool bSimulatePhysics)
+{
+    if(StaticMeshComponent)
+    {
+        StaticMeshComponent->SetSimulatePhysics(bSimulatePhysics);
+    }
+}
+
+void AInteractableBase::SetEnableGravity(bool bEnableGravity)
+{
+    if(StaticMeshComponent)
+    {
+        StaticMeshComponent->SetEnableGravity(bEnableGravity);
+    }
+}
+
 void AInteractableBase::FindAudioComponent()
 {
     AudioComponent = FindComponentByClass<UAudioComponent>();

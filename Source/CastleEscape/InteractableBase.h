@@ -37,6 +37,9 @@ public:
 
     virtual void Interact();
 
+    void SetSimulatePhysics(bool bSimulatePhysics);
+    void SetEnableGravity(bool bEnableGravity);
+
 private:
     void FindAudioComponent();
 };

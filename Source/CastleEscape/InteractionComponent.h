@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "LeverPullComponent.h"
+#include "InteractableBase.h"
 #include "Components/ActorComponent.h"
 #include "Components/InputComponent.h"
 #include "PhysicsEngine/PhysicsHandleComponent.h"
@@ -40,6 +40,9 @@ private:
 
     UPROPERTY()
     UPhysicsHandleComponent* PhysicsHandleComponent{nullptr};
+
+    UPROPERTY()
+    AInteractableBase* GrabbedObject{nullptr};
 
     void FindInputComponent();
     void FindPhysicsHandleComponent();
